@@ -854,7 +854,9 @@ class GenerationMixin:
 
         if generation_config.sequence_bias is not None:
             processors.append(SequenceBiasLogitsProcessor(sequence_bias=generation_config.sequence_bias))
-
+        if generation_config.logit_bias is not None:
+            processors.append(LogitBiasProcessor(generation_config.logit_bias))
+            
         if generation_config.diversity_penalty is not None and generation_config.diversity_penalty > 0.0:
             processors.append(
                 HammingDiversityLogitsProcessor(
